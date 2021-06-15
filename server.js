@@ -21,6 +21,6 @@ app.post('/upload', (req,res)=>{
     });
 });
 
-app.listen(3000, ()=>{
-    console.log("Server is up on 3000")
+app.listen(4000, ()=>{
+    console.log("Server is up on 4000")
 })

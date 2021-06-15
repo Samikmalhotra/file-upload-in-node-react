@@ -15,10 +15,18 @@ function App() {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", fileName);
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+      },
+    };
+
     try {
       const res = await axios.post(
         "http://localhost:4000/upload",
-        formData
+        formData,
+        config
       );
       console.log(res);
     } catch (ex) {

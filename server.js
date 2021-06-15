@@ -1,7 +1,7 @@
 const express = require("express");
 const fileupload = require("express-fileupload");
 const cors = require("cors");
-
+const fs = require('fs');
 const app = express();
 
 app.use(cors());
@@ -11,14 +11,15 @@ app.use(express.static("files"));
 app.post("/upload", (req, res) => {
   const newpath = __dirname + "/files/";
   const file = req.files.file;
-  const filename = file.name;
+  const filename = req.body.fileName;
+  const uploadpath = newpath + filename;
+  file.mv(uploadpath)
+  res.send({
+    status: true,
+    message: 'File is uploaded',
 
-  file.mv(`${newpath}${filename}`, (err) => {
-    if (err) {
-      res.status(500).send({ message: "File upload failed", code: 200 });
-    }
-    res.status(200).send({ message: "File Uploaded", code: 200 });
-  });
+});
+    
 });
 
 app.listen(4000, () => {

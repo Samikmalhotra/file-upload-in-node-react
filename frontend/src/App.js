@@ -14,14 +14,18 @@ function App() {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fileName", fileName);
+    console.log('y?')
     try {
       const res = await axios.post(
-        "/upload",
+        "http://localhost:4000/upload",
         formData
       );
       console.log(res);
     } catch (ex) {
-      console.log(ex);
+      const res = await axios.post(
+        "http://localhost:4000/upload",
+        formData
+      );
     }
   };
 
